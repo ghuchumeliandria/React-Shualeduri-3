@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: Outfit_light;
+    src: url(./Fonts/static/Outfit-Light.ttf);
+}
+@theme {
+    --color-bg-main : #10141E;
+    --color-semi-dark-blue : #161D2F;
+    --color-cl-red: #FC4747;
+    --font-Outfit_light : "Outfit_light";
+    --breakpoint-mb: 550px
+}

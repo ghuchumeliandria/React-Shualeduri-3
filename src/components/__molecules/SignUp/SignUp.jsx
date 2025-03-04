@@ -14,6 +14,10 @@ const schema = yup.object().shape({
     .required("Password is required.")
     .min(8, "Password must be at least 8 characters long."),
 
+  repeatPassword: yup
+    .string("Password must not contain any numbers")
+    .required("Password is required.")
+    .min(8, "Password must be at least 8 characters long."),
 });
 
 export default function SignUp({ setShowLogin, setShowSignup }) {
@@ -30,7 +34,9 @@ export default function SignUp({ setShowLogin, setShowSignup }) {
 
   const onSubmit = (data) => {
     console.log("Form submitted:", data);
-    console.log("ravii");
+    localStorage.setItem('data' , JSON.stringify(data))
+    setShowLogin(true);
+    setShowSignup(false);
   };
 
   return (
@@ -71,16 +77,16 @@ export default function SignUp({ setShowLogin, setShowSignup }) {
           <div className="">
             <input
               type="password"
-              name="Repeat password"
+              name="repeatPassword"
               className="w-full pl-4 pb-4.5 placeholder:text-[#ffffff86]  text-[#ffffff86] border-b-[1px] border-b-[#ffffff86] outline-none"
               placeholder="Repeat password"
-              {...register("Repeat password")}
+              {...register("repeatPassword")}
             />
-            {/* {errors.RepeatPassword && (
+            {errors.repeatPassword && (
               <p className="text-cl-red text-right mt-1.5">
-                {errors.RepeatPassword.message}
+                {errors.repeatPassword.message}
               </p>
-            )} */}
+            )}
           </div>
           <LoginBtn
             MainBtnP={"Create an account"}

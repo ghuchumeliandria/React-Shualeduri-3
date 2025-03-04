@@ -1,14 +1,10 @@
-import MainPage from "./components/__organism/MainPage/MainPage"
-
+import MainPage from "./Pages/MainPage/MainPage";
 function App() {
-
   return (
     <>
-
-    <MainPage />
-
+      <MainPage />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

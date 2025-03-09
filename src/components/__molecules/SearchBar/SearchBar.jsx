@@ -45,8 +45,9 @@ function SearchBar({ setShowSearchBar, setShowMovies, showSearchBar }) {
         <input
           type="text"
           onChange={filteredSearch}
-          className="text-[#ffffff70] w-full max-w-[350px] outline-0 text-[24px] font-Outfit_light"
+          className="text-[#ffffff70] w-full max-w-[350px] outline-0 text-[24px] font-Outfit_light max-mb:text-[16px]"
           placeholder="Search for movies or TV series"
+          maxLength={35}
         />
 
 
@@ -54,9 +55,9 @@ function SearchBar({ setShowSearchBar, setShowMovies, showSearchBar }) {
       {value && (
         
         <div className=" flex flex-col gap-8  w-full max-w-[1240px]  m-auto">
-          <div className="text-white text-[32px] font-Outfit_light">
+          <div className="text-white text-[32px] font-Outfit_light w-full max-mb:text-[16px]">
             {searchLength > 0 ? (
-              `Found ${searchLength} results for '${value}'`
+              <p>{`Found ${searchLength} results for '${value}'`}</p>
             ) : (
               <p>{`not found result for '${value}'`}</p>
             )}

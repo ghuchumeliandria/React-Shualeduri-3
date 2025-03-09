@@ -18,7 +18,7 @@ const schema = yup.object().shape({
 
 });
 
-export default function LogIn({ setShowLogin, setShowSignup }) {
+export default function LogIn({ setShowLogin, setShowSignup ,setRegister ,setMoviePage }) {
   const showSignup = () => {
     setShowLogin(false);
     setShowSignup(true);
@@ -39,25 +39,11 @@ export default function LogIn({ setShowLogin, setShowSignup }) {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
   
-  const pageBoolean2 = {
-    register : false,
-    mainPage : true
-  }
-  
-  localStorage.setItem("pageTrue", JSON.stringify(pageBoolean2) )
-
-  const pageBoolean = {
-    register : false,
-    mainPage : true
-  }
-  
   
   const onSubmit = (data) => {
     if(registerData.email == data.email && registerData.password == data.password ){
-      localStorage.setItem("pageTrue", JSON.stringify(pageBoolean) )
-      console.log("udris")
-    }else{
-      console.log("ar udris")
+      setRegister(false)
+      setMoviePage(true)
     }
   };
   return (

@@ -1,25 +1,72 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MovieDescription from "../MovieDescription/MovieDescription";
 
 function AllMovie({ Data }) {
+  const [favouritesArr,setFavouritesArr] = useState([])
+  const [fill,setFill] = useState({})
+  // console.log(Data)
+
+  useEffect(() =>{
+    const savedFavourites = JSON.parse(localStorage.getItem("favourites"))
+    if(savedFavourites){
+
+      setFavouritesArr(savedFavourites)
+    }
+  },[])
+
+
+  const AddFavourites = (movie) =>{
+
+
+    setFill((prev) =>({
+      ...prev,
+        [movie.title] : prev[movie.title] === "white" ? 'none' : "white"
+    }))
+
+
+
+    const favouritesObject = {
+      title : movie.title,
+      img : movie.thumbnail.regular.large,
+      year : movie.year,
+      category : movie.category,
+      rating : movie.rating
+    }
+
+    const checkFavourites = favouritesArr.some((item) => item.title === movie.title)
+
+    let updateArr ;
+
+    if(checkFavourites){
+      updateArr = favouritesArr.filter((item) =>{
+        return item.title !== movie.title
+      })
+    }else{
+      updateArr =  [...favouritesArr , favouritesObject]
+    }
+
+    setFavouritesArr(updateArr)
+    localStorage.setItem("favourites" , JSON.stringify(updateArr))
+  }
   return (
     <>
       {Data.map((movie) => {
         return (
-          <div className="w-full max-w-[280px]  " key={movie.title}>
+          <div className="w-full max-w-[280px]   " key={movie.title}>
             <div className="w-full relative ">
               <img
                 src={`../../../${movie.thumbnail.regular.large}`}
                 className="rounded-[8px] w-full cursor-pointer object-cover"
                 alt=""
               />
-              <div className="absolute top-4 right-4 cursor-pointer">
+              <div className="absolute top-4 right-4 cursor-pointer max-mb:top-2 max-mb:right-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="32"
                   height="32"
                   viewBox="0 0 32 32"
-                  fill="none">
+                  onClick={() => AddFavourites(movie)}
+                  fill={fill[movie.title] || 'none'}>
                   <circle
                     opacity="0.500647"
                     cx="16"
@@ -37,7 +84,7 @@ function AllMovie({ Data }) {
             </div>
             <MovieDescription movie={movie} />
             <div className="">
-              <p className="text-white text-[18px]">{movie.title}</p>
+              <p className="text-white text-[18px] max-mb:text-[14px]">{movie.title}</p>
             </div>
           </div>
         );

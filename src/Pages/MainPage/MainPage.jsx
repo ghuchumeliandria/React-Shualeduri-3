@@ -7,28 +7,24 @@ import MoviePage from "../../components/__organism/MoviePage/MoviePage";
 export default function MainPage() {
   const [showLogin, setShowLogin] = useState(true);
   const [showSignup, setShowSignup] = useState(false);
-  const [mainPage, setMainPage] = useState([]);
-
-  useEffect(() => {
-    const showUpPage = JSON.parse(localStorage.getItem("pageTrue"));
-    setMainPage(showUpPage);
-    console.log(mainPage);
-  }, []);
-
+  const [register,setRegister] = useState(true)
+  const [moviePage,setMoviePage] = useState(false)
   return (
     <>
       <div className="w-full min-h-[100vh]  bg-bg-main flex justify-center box-border ">
-        {mainPage.register && (
+        {register && (
           <div className="w-full h-full min-h-[100vh] flex justify-center items-center flex-col  gap-[83px]">
             <div className="">
               <img src={MovieIcon} alt="" />
             </div>
 
-            <div className="max-w-[400px] w-full p-8 bg-semi-dark-blue rou6nded-[20px] duration-225 max-mb:max-w-[327px] max-mb:p-6 ">
+            <div className="max-w-[400px]  w-full rounded-[10px] p-8 bg-semi-dark-blue rou6nded-[20px]  duration-225 max-mb:max-w-[327px] max-mb:p-6 ">
               {showLogin && (
                 <LogIn
                   setShowSignup={setShowSignup}
                   setShowLogin={setShowLogin}
+                  setRegister={setRegister}
+                  setMoviePage={setMoviePage}
                 />
               )}
               {showSignup && (
@@ -41,7 +37,7 @@ export default function MainPage() {
           </div>
         )}
 
-        {mainPage.mainPage && 
+        {moviePage && 
           <MoviePage />
         }
       </div>

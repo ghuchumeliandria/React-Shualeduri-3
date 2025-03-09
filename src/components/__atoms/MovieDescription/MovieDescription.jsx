@@ -3,7 +3,7 @@ import React from "react";
 function MovieDescription({movie}) {
   return (
     <>
-      <div className="flex gap-2 text-[#ffffffaf] items-center mt-2">
+      <div className="flex gap-2 text-[#ffffffaf] items-center mt-2 max-mb:text-[11px]">
         <p>{movie.year}</p>
         <svg
           xmlns="http://www.w3.org/2000/svg"
